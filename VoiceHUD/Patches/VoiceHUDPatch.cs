@@ -1,5 +1,6 @@
 ﻿using Dissonance;
 using HarmonyLib;
+using UnityEngine;
 
 namespace VoiceHUD.Patches
 {
@@ -14,10 +15,14 @@ namespace VoiceHUD.Patches
             if (!IngamePlayerSettings.Instance.settings.micEnabled || IngamePlayerSettings.Instance.settings.pushToTalk) 
                 return;
 
-            if ((UnityEngine.Object)StartOfRound.Instance.voiceChatModule == (UnityEngine.Object)null)
+            if (StartOfRound.Instance.voiceChatModule == null)
                 return;
             VoicePlayerState player = StartOfRound.Instance.voiceChatModule.FindPlayer(StartOfRound.Instance.voiceChatModule.LocalPlayerName);
-            HUDManager.Instance.PTTIcon.enabled = player.IsSpeaking;
+            if (player.IsSpeaking)
+            {
+                float detectedAmplitude = Mathf.Clamp(player.Amplitude * 35f, 0.0f, 1f);
+                HUDManager.Instance.PTTIcon.enabled = detectedAmplitude > 0.01f;
+            }
         }
     }
 }
