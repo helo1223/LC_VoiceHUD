@@ -1,6 +1,7 @@
 ﻿using Dissonance;
 using HarmonyLib;
 using UnityEngine;
+using VoiceHUD.Configuration;
 
 namespace VoiceHUD.Patches
 {
@@ -16,6 +17,7 @@ namespace VoiceHUD.Patches
         [HarmonyPostfix]
         private static void Update()
         {
+
             if (!IngamePlayerSettings.Instance.settings.micEnabled || IngamePlayerSettings.Instance.settings.pushToTalk) 
                 return;
 
@@ -25,7 +27,10 @@ namespace VoiceHUD.Patches
             if (player.IsSpeaking)
             {
                 float detectedAmplitude = Mathf.Clamp(player.Amplitude * 35f, 0.0f, 1f);
-                HUDManager.Instance.PTTIcon.color = GetColorByVolume(detectedAmplitude * 100);
+                if (Config.ColorsEnabled)
+                {
+                    HUDManager.Instance.PTTIcon.color = GetColorByVolume(detectedAmplitude * 100);
+                }
                 HUDManager.Instance.PTTIcon.enabled = detectedAmplitude > 0.01f;
             }
         }
@@ -33,13 +38,17 @@ namespace VoiceHUD.Patches
         public static Color GetColorByVolume(float volume)
         {
             if (volume < 20)
+            {
                 return Start;
+            }
             else if (volume > 70)
             {
                 return End;
             }
             else
+            {
                 return Center;
+            }
         }
     }
 }

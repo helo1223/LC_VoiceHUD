@@ -13,3 +13,6 @@ Might need some tuning with the values
 
 ###### Version 1.0.3:
 Removed debug line
+
+###### Version 1.0.4:
+Volume colors are no longer default, now they can be enabled in BepInEx/config/VoiceHUD.cfg
