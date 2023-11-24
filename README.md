@@ -10,3 +10,6 @@ Added a threshold of 0.01f so it doesn't blink on every small noise.
 Added colors :)
 If the icon is green, dogs shouldn't hear you from further than 5 meters, at least in my experience.
 Might need some tuning with the values
+
+###### Version 1.0.3:
+Removed debug line

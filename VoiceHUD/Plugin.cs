@@ -10,7 +10,7 @@ namespace VoiceHUD
     {
         private const string modGUID = "5Bit.VoiceHUD";
         private const string modName = "VoiceHUD";
-        private const string modVersion = "1.0.2";
+        private const string modVersion = "1.0.3";
 
         private readonly Harmony harmony = new Harmony(modGUID);
 
