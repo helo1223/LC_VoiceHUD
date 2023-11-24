@@ -32,7 +32,6 @@ namespace VoiceHUD.Patches
 
         public static Color GetColorByVolume(float volume)
         {
-            Debug.Log(volume);
             if (volume < 20)
                 return Start;
             else if (volume > 70)
